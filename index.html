@@ -1,1 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Iftar NFC — Roued Al Khir</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-icon">🍽️</div>
+
+            <div>
+                <h1>Iftar NFC</h1>
+                <p>Roued Al Khir</p>
+            </div>
+        </div>
+
+        <button id="themeBtn" class="icon-btn" title="Changer le thème">
+            🌙
+        </button>
+    </header>
+
+
+    <!-- MAIN -->
+    <main class="container">
+
+        <!-- WELCOME -->
+        <section class="welcome-card">
+            <div>
+                <span class="welcome-label">GESTION DES REPAS</span>
+
+                <h2>
+                    Bienvenue 👋
+                </h2>
+
+                <p>
+                    Système de gestion et de distribution
+                    des repas Iftar par NFC.
+                </p>
+            </div>
+
+            <div class="welcome-icon">
+                📡
+            </div>
+        </section>
+
+
+        <!-- STATISTICS -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+
+                <div>
+                    <span>Bénéficiaires</span>
+                    <strong id="statBeneficiaries">0</strong>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon">🍱</div>
+
+                <div>
+                    <span>Repas programmés</span>
+                    <strong id="statPlanned">0</strong>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon">✅</div>
+
+                <div>
+                    <span>Repas distribués</span>
+                    <strong id="statDistributed">0</strong>
+                </div>
+            </div>
+
+
+            <div class="stat-card">
+                <div class="stat-icon">📍</div>
+
+                <div>
+                    <span>Zones</span>
+                    <strong id="statZones">0</strong>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- MENU -->
+        <section class="section">
+
+            <div class="section-title">
+                <h2>Gestion</h2>
+                <p>Accéder aux différentes fonctionnalités</p>
+            </div>
+
+
+            <div class="menu-grid">
+
+                <!-- NFC -->
+                <a href="scanner.html" class="menu-card nfc-card">
+
+                    <div class="menu-icon">
+                        📡
+                    </div>
+
+                    <div class="menu-content">
+                        <h3>Scanner NFC</h3>
+
+                        <p>
+                            Scanner une carte NFC
+                            et enregistrer la distribution.
+                        </p>
+                    </div>
+
+                    <span class="arrow">→</span>
+
+                </a>
+
+
+                <!-- BENEFICIARIES -->
+                <a href="beneficiaries.html" class="menu-card">
+
+                    <div class="menu-icon">
+                        👥
+                    </div>
+
+                    <div class="menu-content">
+                        <h3>Bénéficiaires</h3>
+
+                        <p>
+                            Ajouter et gérer les bénéficiaires.
+                        </p>
+                    </div>
+
+                    <span class="arrow">→</span>
+
+                </a>
+
+
+                <!-- ZONES -->
+                <a href="zones.html" class="menu-card">
+
+                    <div class="menu-icon">
+                        📍
+                    </div>
+
+                    <div class="menu-content">
+                        <h3>Zones</h3>
+
+                        <p>
+                            Organiser les zones de distribution.
+                        </p>
+                    </div>
+
+                    <span class="arrow">→</span>
+
+                </a>
+
+
+                <!-- AGENTS -->
+                <a href="agents.html" class="menu-card">
+
+                    <div class="menu-icon">
+                        🧑‍💼
+                    </div>
+
+                    <div class="menu-content">
+                        <h3>Agents</h3>
+
+                        <p>
+                            Gérer les agents et responsables.
+                        </p>
+                    </div>
+
+                    <span class="arrow">→</span>
+
+                </a>
+
+
+                <!-- TRACKING -->
+                <a href="tracking.html" class="menu-card">
+
+                    <div class="menu-icon">
+                        🗺️
+                    </div>
+
+                    <div class="menu-content">
+                        <h3>Suivi</h3>
+
+                        <p>
+                            Suivre les agents et les zones.
+                        </p>
+                    </div>
+
+                    <span class="arrow">→</span>
+
+                </a>
+
+
+                <!-- STATISTICS -->
+                <a href="statistics.html" class="menu-card">
+
+                    <div class="menu-icon">
+                        📊
+                    </div>
+
+                    <div class="menu-content">
+                        <h3>Tableau de bord</h3>
+
+                        <p>
+                            Consulter les statistiques.
+                        </p>
+                    </div>
+
+                    <span class="arrow">→</span>
+
+                </a>
+
+
+                <!-- HISTORY -->
+                <a href="history.html" class="menu-card">
+
+                    <div class="menu-icon">
+                        🕘
+                    </div>
+
+                    <div class="menu-content">
+                        <h3>Historique</h3>
+
+                        <p>
+                            Voir les distributions effectuées.
+                        </p>
+                    </div>
+
+                    <span class="arrow">→</span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- NFC STATUS -->
+        <section class="status-card">
+
+            <div class="status-dot"></div>
+
+            <div>
+                <strong>Système NFC</strong>
+
+                <p id="nfcStatus">
+                    Vérification de la compatibilité...
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <p>
+            © 2026 Roued Al Khir — Iftar NFC
+        </p>
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script type="module" src="js/app.js"></script>
+
+</body>
+</html>

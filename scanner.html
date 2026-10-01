@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Scanner NFC — Iftar</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            📡
+        </div>
+
+        <div>
+            <h1>Scanner NFC</h1>
+            <p>Roued Al Khir</p>
+        </div>
+
+    </div>
+
+    <a href="index.html" class="icon-btn">
+        ←
+    </a>
+
+</header>
+
+
+<main class="container">
+
+    <section class="welcome-card">
+
+        <div>
+
+            <span class="welcome-label">
+                DISTRIBUTION
+            </span>
+
+            <h2>
+                Scanner une carte
+            </h2>
+
+            <p>
+                Approchez la carte NFC du téléphone
+                pour identifier le bénéficiaire.
+            </p>
+
+        </div>
+
+        <div class="welcome-icon">
+            📡
+        </div>
+
+    </section>
+
+
+    <section class="scanner-box">
+
+        <div class="nfc-animation">
+            📡
+        </div>
+
+        <h2>
+            Prêt à scanner
+        </h2>
+
+        <p id="scanMessage">
+            Appuyez sur le bouton pour commencer.
+        </p>
+
+
+        <button
+            id="scanBtn"
+            class="primary-btn"
+        >
+            📡 Scanner NFC
+        </button>
+
+
+        <button
+            id="simulationBtn"
+            class="secondary-btn"
+        >
+            🧪 Mode simulation
+        </button>
+
+    </section>
+
+
+    <section
+        id="beneficiaryResult"
+        class="result-box hidden"
+    >
+
+        <h2 id="beneficiaryName">
+            —
+        </h2>
+
+        <p id="beneficiaryInfo">
+            —
+        </p>
+
+
+        <div class="quantity-box">
+
+            <label>
+                Nombre de repas
+            </label>
+
+            <input
+                id="mealQuantity"
+                type="number"
+                min="1"
+                value="1"
+            >
+
+        </div>
+
+
+        <button
+            id="giveBtn"
+            class="primary-btn"
+        >
+            ✅ Confirmer la distribution
+        </button>
+
+    </section>
+
+</main>
+
+
+<script
+    type="module"
+    src="js/nfc.js"
+></script>
+
+</body>
+
+</html>
