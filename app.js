@@ -1,94 +1,96 @@
-// =====================================================
-// IFTAR NFC — GLOBAL APP
-// =====================================================
-
 document.addEventListener("DOMContentLoaded", () => {
+
     initTheme();
+
     initNFCStatus();
+
     updateDashboardStats();
+
 });
 
 
-// =====================================================
-// THEME
-// =====================================================
+/* =========================
+   THEME
+========================= */
 
 function initTheme() {
 
-    const themeBtn = document.getElementById("themeBtn");
+    const btn = document.getElementById("themeBtn");
 
-    const savedTheme = localStorage.getItem("iftar_theme");
+    if (!btn) return;
+
+    const savedTheme =
+        localStorage.getItem("iftar_theme");
 
     if (savedTheme === "dark") {
+
         document.body.classList.add("dark");
 
-        if (themeBtn) {
-            themeBtn.textContent = "☀️";
-        }
+        btn.textContent = "☀️";
+
     }
 
-    if (themeBtn) {
+    btn.addEventListener("click", () => {
 
-        themeBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark");
 
-            document.body.classList.toggle("dark");
+        const dark =
+            document.body.classList.contains("dark");
 
-            const dark =
-                document.body.classList.contains("dark");
+        localStorage.setItem(
+            "iftar_theme",
+            dark ? "dark" : "light"
+        );
 
-            localStorage.setItem(
-                "iftar_theme",
-                dark ? "dark" : "light"
-            );
+        btn.textContent =
+            dark ? "☀️" : "🌙";
 
-            themeBtn.textContent =
-                dark ? "☀️" : "🌙";
-        });
-    }
+    });
+
 }
 
 
-// =====================================================
-// NFC STATUS
-// =====================================================
+/* =========================
+   NFC STATUS
+========================= */
 
 function initNFCStatus() {
 
-    const status = document.getElementById("nfcStatus");
+    const box =
+        document.getElementById("nfcStatus");
 
-    if (!status) return;
+    if (!box) return;
+
+    const text =
+        box.querySelector("p");
+
+    const dot =
+        box.querySelector(".status-dot");
 
     if ("NDEFReader" in window) {
 
-        status.textContent =
+        text.textContent =
             "NFC disponible sur cet appareil.";
+
+        dot.style.background =
+            "#16805b";
 
     } else {
 
-        status.textContent =
-            "NFC Web non disponible sur ce navigateur.";
+        text.textContent =
+            "NFC Web non disponible. Utilisez le mode simulation.";
+
+        dot.style.background =
+            "#f0a500";
+
     }
+
 }
 
 
-// =====================================================
-// DASHBOARD DATA
-// =====================================================
-
-function getData(key) {
-
-    try {
-
-        return JSON.parse(
-            localStorage.getItem(key)
-        ) || [];
-
-    } catch {
-
-        return [];
-    }
-}
-
+/* =========================
+   DASHBOARD
+========================= */
 
 function updateDashboardStats() {
 
@@ -101,108 +103,86 @@ function updateDashboardStats() {
     const distributions =
         getData("distributions");
 
-
-    const planned =
-        beneficiaries.reduce(
-            (total, item) =>
-                total + Number(item.mealsPerDay || 0),
-            0
-        );
-
-
-    const distributed =
-        distributions
-            .filter(item =>
-                item.date === getToday()
-            )
-            .reduce(
-                (total, item) =>
-                    total + Number(item.quantity || 0),
-                0
-            );
-
-
-    const beneficiaryElement =
+    const statBeneficiaries =
         document.getElementById(
             "statBeneficiaries"
         );
 
-    const plannedElement =
+    const statPlanned =
         document.getElementById(
             "statPlanned"
         );
 
-    const distributedElement =
+    const statDistributed =
         document.getElementById(
             "statDistributed"
         );
 
-    const zonesElement =
+    const statZones =
         document.getElementById(
             "statZones"
         );
 
 
-    if (beneficiaryElement)
-        beneficiaryElement.textContent =
+    if (statBeneficiaries) {
+
+        statBeneficiaries.textContent =
             beneficiaries.length;
 
+    }
 
-    if (plannedElement)
-        plannedElement.textContent =
+
+    if (statZones) {
+
+        statZones.textContent =
+            zones.length;
+
+    }
+
+
+    let planned = 0;
+
+    beneficiaries.forEach(b => {
+
+        planned +=
+            Number(b.mealsPerDay || 0);
+
+    });
+
+
+    if (statPlanned) {
+
+        statPlanned.textContent =
             planned;
 
+    }
 
-    if (distributedElement)
-        distributedElement.textContent =
+
+    let distributed = 0;
+
+    distributions.forEach(d => {
+
+        distributed +=
+            Number(d.quantity || 0);
+
+    });
+
+
+    if (statDistributed) {
+
+        statDistributed.textContent =
             distributed;
 
+    }
 
-    if (zonesElement)
-        zonesElement.textContent =
-            zones.length;
 }
 
 
-// =====================================================
-// DATE
-// =====================================================
+/* =========================
+   LOCAL STORAGE
+========================= */
 
-function getToday() {
-
-    const date = new Date();
-
-    const year =
-        date.getFullYear();
-
-    const month =
-        String(
-            date.getMonth() + 1
-        ).padStart(2, "0");
-
-    const day =
-        String(
-            date.getDate()
-        ).padStart(2, "0");
-
-    return `${year}-${month}-${day}`;
-}
-
-
-// =====================================================
-// LOCAL STORAGE HELPERS
-// =====================================================
-
-function saveData(key, data) {
-
-    localStorage.setItem(
-        key,
-        JSON.stringify(data)
-    );
-}
-
-
-function loadData(key) {
+function getData(key) {
 
     try {
 
@@ -213,61 +193,61 @@ function loadData(key) {
     } catch {
 
         return [];
+
     }
+
 }
 
 
-// =====================================================
-// DEMO DATA
-// =====================================================
+/* =========================
+   DEMO DATA
+========================= */
 
 function initializeDemoData() {
 
     if (!localStorage.getItem("beneficiaries")) {
 
-        saveData(
+        localStorage.setItem(
             "beneficiaries",
-            []
+            JSON.stringify([])
         );
-    }
 
+    }
 
     if (!localStorage.getItem("zones")) {
 
-        saveData(
+        localStorage.setItem(
             "zones",
-            []
+            JSON.stringify([])
         );
-    }
 
+    }
 
     if (!localStorage.getItem("agents")) {
 
-        saveData(
+        localStorage.setItem(
             "agents",
-            []
+            JSON.stringify([])
         );
-    }
 
+    }
 
     if (!localStorage.getItem("distributions")) {
 
-        saveData(
+        localStorage.setItem(
             "distributions",
-            []
+            JSON.stringify([])
         );
-    }
 
+    }
 
     if (!localStorage.getItem("zoneDeliveries")) {
 
-        saveData(
+        localStorage.setItem(
             "zoneDeliveries",
-            []
+            JSON.stringify([])
         );
+
     }
+
 }
-
-
-// Initialize
-initializeDemoData();
